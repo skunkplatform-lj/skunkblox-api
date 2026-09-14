@@ -1,0 +1,20 @@
+[build]
+functions = "netlify/functions"
+
+[[redirects]]
+from = "/friends/:uid"
+to = "/.netlify/functions/ff-api/friends/:uid"
+status = 200
+force = true
+
+[[redirects]]
+from = "/bestfriends/:uid"
+to = "/.netlify/functions/ff-api/bestfriends/:uid"
+status = 200
+force = true
+
+[[redirects]]
+from = "/bestfriends/request"
+to = "/.netlify/functions/ff-api/bestfriends/request"
+status = 200
+force = true
