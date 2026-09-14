@@ -13,7 +13,7 @@ function json(statusCode, data) {
 }
 
 async function sendWebhookRequest(uid, friends) {
-	const webhook = process.env.dc; // LET THE API USE DISCORD WEBHOOK URL
+	const webhook = process.env.dc;
 
 	if (!webhook) {
 		console.warn("[ff-api] Webhook URL is not configured");
@@ -26,15 +26,18 @@ async function sendWebhookRequest(uid, friends) {
 			"Content-Type": "application/json"
 		},
 		body: JSON.stringify({
-			uid: String(uid),
-			friends: friends.map(String)
+			content:
+				`Best Friends request\n` +
+				`UID: ${String(uid)}\n` +
+				`Friends: ${friends.map(String).join(", ")}`
 		})
 	});
 
+	const responseBody = await response.text();
+
 	if (!response.ok) {
-		throw new Error(
-			`Webhook returned ${response.status}`
-		);
+		console.error("[ff-api] Discord webhook:", response.status, responseBody);
+		throw new Error(`Webhook returned ${response.status}`);
 	}
 }
 
