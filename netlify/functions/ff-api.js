@@ -12,6 +12,32 @@ function json(statusCode, data) {
 	};
 }
 
+async function sendWebhookRequest(uid, friends) {
+	const webhook = process.env.dc;
+
+	if (!webhook) {
+		console.warn("[ff-api] Webhook URL is not configured");
+		return;
+	}
+
+	const response = await fetch(webhook, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify({
+			uid: String(uid),
+			friends: friends.map(String)
+		})
+	});
+
+	if (!response.ok) {
+		throw new Error(
+			`Webhook returned ${response.status}`
+		);
+	}
+}
+
 function getUid(event) {
 	const path = event.path || "";
 	const parts = path.split("/").filter(Boolean);
@@ -47,7 +73,10 @@ exports.handler = async function (event) {
 				});
 			}
 
-			const friends = await skunkblox.friends.getFriends(uid, 200);
+			const friends = await skunkblox.friends.getFriends(
+				uid,
+				200
+			);
 
 			return json(
 				200,
@@ -74,7 +103,10 @@ exports.handler = async function (event) {
 				});
 			}
 
-			return json(200, bestFriends[uid] || []);
+			return json(
+				200,
+				bestFriends[uid] || []
+			);
 		}
 
 		if (
@@ -117,6 +149,11 @@ exports.handler = async function (event) {
 			bestFriends[uid] = [
 				...new Set(validFriends)
 			];
+
+			await sendWebhookRequest(
+				uid,
+				bestFriends[uid]
+			);
 
 			return json(200, {
 				m: "Best Friends Updated",
