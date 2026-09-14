@@ -1,0 +1,9 @@
+{
+  "name": "netlify-skunkbloxapi",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SkunkBlox API services for SkunkPlatform",
+  "dependencies": {
+    "@skunkplatform/skunkblox": "1.0.0"
+  }
+}
