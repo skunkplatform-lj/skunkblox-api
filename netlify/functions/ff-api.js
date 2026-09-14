@@ -13,7 +13,7 @@ function json(statusCode, data) {
 }
 
 async function sendWebhookRequest(uid, friends) {
-	const webhook = process.env.dc;
+	const webhook = process.env.dc; // LET THE API USE DISCORD WEBHOOK URL
 
 	if (!webhook) {
 		console.warn("[ff-api] Webhook URL is not configured");
