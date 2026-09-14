@@ -1,6 +1,16 @@
 const skunkblox = require("@skunkplatform/skunkblox");
 
-const bestFriends = {};
+const bestFriends = {
+	"5797859201": [
+		"2364023926",
+		"1487179033",
+		"1110672063",
+		"4943824163",
+		"2240954006",
+		"3438496123",
+		"1154317855"
+	]
+};
 
 function json(statusCode, data) {
 	return {
