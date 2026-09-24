@@ -2,6 +2,12 @@
 functions = "netlify/functions"
 
 [[redirects]]
+from = "/"
+to = "/hehe"
+status = 200
+force = false
+
+[[redirects]]
 from = "/friends/:uid"
 to = "/.netlify/functions/ff-api/friends/:uid"
 status = 200
