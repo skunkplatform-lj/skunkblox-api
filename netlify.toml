@@ -8,14 +8,14 @@ status = 200
 force = false
 
 [[redirects]]
-from = "/catalog/*"
-to = "/.netlify/functions/catalog-api/*"
+from = "/catalog"
+to = "/.netlify/functions/catalog-api"
 status = 200
 force = true
 
 [[redirects]]
-from = "/catalog"
-to = "/.netlify/functions/catalog-api"
+from = "/catalog/*"
+to = "/.netlify/functions/catalog-api/*"
 status = 200
 force = true
 
